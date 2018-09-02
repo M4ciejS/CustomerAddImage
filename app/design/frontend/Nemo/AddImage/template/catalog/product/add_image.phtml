@@ -1,0 +1,13 @@
+<form class="add_image--form" action="<?php echo $this->getUrl('addimage/index/saveUploadFile/');?>" method="post" enctype="multipart/form-data">
+    <h2><?= __('Add product images') ;?></h2>
+    <ul class="form-list">
+        <li>
+            <label for="filename"><?=__('Browse') ?></label>
+            <div class="input-box">
+                <input id="filename" name="filename" type="file"/>
+            </div>
+        </li>
+    </ul>
+    <input type="hidden" name="product_id" value="<?= $this->getProduct()->getId(); ?>" />
+    <button type="submit" class="button" title="<?= __('Submit'); ?>"><?= __('Submit'); ?></button>
+</form>

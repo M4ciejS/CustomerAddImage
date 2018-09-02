@@ -1,0 +1,42 @@
+<ul>
+    <?php foreach ($this->getImages() as $image) : ?>
+        <li><pre><?php var_dump($image->getData()); ?></pre></li>
+    <?php endforeach; ?>
+</ul> 
+<div class="entry-edit">
+    <div class="entry-edit-head">
+        <h4 class="icon-head head-edit-form fieldset-legend">Customer Images</h4>
+    </div>
+    <div class="fieldset fieldset-wide" id="group_fields12">
+        <div class="hor-scroll">
+            <table cellspacing="0" class="form-list">
+                <thead>
+                    <tr>
+                        <th class="label"><label><?= __('Image') ;?></label></th>
+                        <th class="label"><label><?= __('Title') ;?></label></th>
+                        <th class="label"><label><?= __('Active') ;?></label></th>
+                        <th class="label"><label><?= __('Delete') ;?></label></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($this->getImagesArray() as $image) : ?>
+                    <tr>
+                        <td class="value"><img src="<?= $image['thumbnail'] ; ?>" title="<?= $image['title'] ; ?>" /></td>
+                        <td class="value"><?= $image['title'] ; ?></td>
+                        <td class="value">
+                            <select name="customer_image[<?= $image['id'] ;?>][active]" type="select">
+                                <option value="" disabled><?= __('Please Select') ;?></option>
+                                <option value="0" <?= $image['is_active'] ; ?>><?= __('Disable') ;?></option>
+                                <option value="1" <?= $image['is_active'] ; ?>><?= __('Enable') ;?></option>
+                            </select>
+                        <td>
+                        <td class="value">
+                            <input name="customer_image[<?= $image['id'] ;?>][delete]" type="checkbox" value="1"/>
+                        </td>
+                    </tr>
+                    <?php endforeach ; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
