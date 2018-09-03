@@ -11,4 +11,4 @@ There is a new tab on admin catalog product edit page where admins can view and 
 
 Install
 
-Place the files in appropriate places and enable module.
+Place the files in appropriate places and enable module. This module is packed with sample custom theme, if you want to see the results you need to enable it on the admin design page.(or modify it to use base/default)
