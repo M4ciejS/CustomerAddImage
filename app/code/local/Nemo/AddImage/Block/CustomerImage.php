@@ -9,6 +9,7 @@
  */
 class Nemo_AddImage_Block_CustomerImage extends Mage_Catalog_Block_Product_View
 {
+
     /**
      * Customer image collection
      * 
@@ -24,11 +25,10 @@ class Nemo_AddImage_Block_CustomerImage extends Mage_Catalog_Block_Product_View
     public function __construct(array $args = array())
     {
         parent::__construct($args);
-        $this->customerImageCollection 
-            = Mage::getModel('nemo_addimage/customerImage')
-            ->getCollection()
-            ->addFilter('product_id', $this->getProduct()->getId())
-            ->addFilter('is_active', 1);
+        $this->customerImageCollection = Mage::getModel('nemo_addimage/customerImage')
+                ->getCollection()
+                ->addFilter('product_id', $this->getProduct()->getId())
+                ->addFilter('is_active', 1);
     }
 
     /**
@@ -36,9 +36,9 @@ class Nemo_AddImage_Block_CustomerImage extends Mage_Catalog_Block_Product_View
      * 
      * @return boolean
      */
-    public function hasImages() 
+    public function hasImages()
     {
-        return $this->customerImageCollection->getSize()? true: false;
+        return $this->customerImageCollection->getSize() ? true : false;
     }
 
     /**
@@ -46,17 +46,9 @@ class Nemo_AddImage_Block_CustomerImage extends Mage_Catalog_Block_Product_View
      * 
      * @return array
      */
-    public function getImages() 
+    public function getImages()
     {
-        if ($this->hasImages()) {
-            $images = [];
-            foreach ($this->customerImageCollection as $image) {
-                $images[$image->getId()]['path']
-                    = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) .
-                    'customer_images' . $image->getData('filename');
-                $images[$image->getId()]['title'] = $image->getTitle();
-            }
-            return $images;
-        }
+        return $this->customerImageCollection;
     }
+
 }

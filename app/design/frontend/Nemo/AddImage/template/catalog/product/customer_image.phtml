@@ -1,6 +1,6 @@
 <div class="customer_image--wrapper">
     <h2><?= __('Customer uploaded images'); ?></h2>
     <?php foreach ($this->getImages() as $image) : ?>
-        <img class="customer_image" src="<?= $image['path']; ?>" title="<?=$image['title']; ?>"/>
+        <img class="customer_image" src="<?= $image->getImageUrl(); ?>" title="<?= $image->getTitle(); ?>"/>
     <?php endforeach; ?>
 </div>

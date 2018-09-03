@@ -3,7 +3,6 @@
 class Nemo_AddImage_Block_Adminhtml_Catalog_Product_Tab extends Mage_Adminhtml_Block_Template implements Mage_Adminhtml_Block_Widget_Tab_Interface
 {
 
-    private $_helper;
     /**
      * Set the template for the block
      *
@@ -11,7 +10,6 @@ class Nemo_AddImage_Block_Adminhtml_Catalog_Product_Tab extends Mage_Adminhtml_B
     public function _construct()
     {
         parent::_construct();
-        $this->_helper = Mage::helper('nemo_addimage');
         $this->setTemplate('catalog/product/addimage_tab.phtml');
     }
 
@@ -66,27 +64,17 @@ class Nemo_AddImage_Block_Adminhtml_Catalog_Product_Tab extends Mage_Adminhtml_B
         return Mage::registry('current_product');
     }
 
-    private function getImages() {
-        $customerImageCollection = Mage::getModel('nemo_addimage/customerImage')
+    /**
+     * get images collection
+     * 
+     * @return Nemo_AddImage_Model_Resource_CustomerImage_Collection
+     */
+    public function getImages()
+    {
+        $imageCollection = Mage::getModel('nemo_addimage/customerImage')
                 ->getCollection()
                 ->addFilter('product_id', $this->getProduct()->getId());
-        return $customerImageCollection;
+        return $imageCollection;
     }
 
-    public function getImagesArray() {
-        //check if file exists, if not log error.display error
-        $images = [];
-        foreach ($this->getImages() as $image) {
-            $images[$image->getId()]['id'] = $image->getId();
-            $images[$image->getId()]['path'] = 
-                    Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) .
-                    'customer_images' . $image->getData('filename'); //change it to use helper constants
-            $images[$image->getId()]['thumbnail'] = 
-                    Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) .
-                    'customer_images' . DS . 'thumbnails' . $image->getData('filename'); //change it to use helper constants
-            $images[$image->getId()]['title'] = $image->getData('title');
-            $images[$image->getId()]['is_active'] = $image->getData('is_active') ? 'selected':'';
-        }
-        return $images;
-    }
 }

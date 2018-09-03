@@ -1,8 +1,3 @@
-<ul>
-    <?php foreach ($this->getImages() as $image) : ?>
-        <li><pre><?php var_dump($image->getData()); ?></pre></li>
-    <?php endforeach; ?>
-</ul> 
 <div class="entry-edit">
     <div class="entry-edit-head">
         <h4 class="icon-head head-edit-form fieldset-legend">Customer Images</h4>
@@ -19,19 +14,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($this->getImagesArray() as $image) : ?>
+                    <?php foreach ($this->getImages() as $image) : ?>
                     <tr>
-                        <td class="value"><img src="<?= $image['thumbnail'] ; ?>" title="<?= $image['title'] ; ?>" /></td>
-                        <td class="value"><?= $image['title'] ; ?></td>
+                        <td class="value"><img src="<?= $image->getThumbnailUrl() ; ?>" title="<?= $image->getTitle() ; ?>" /></td>
+                        <td class="value"><?= $image->getTitle() ; ?></td>
                         <td class="value">
-                            <select name="customer_image[<?= $image['id'] ;?>][active]" type="select">
+                            <select name="customer_image[<?= $image->getId() ;?>][active]" type="select">
                                 <option value="" disabled><?= __('Please Select') ;?></option>
                                 <option value="0" <?= $image['is_active'] ; ?>><?= __('Disable') ;?></option>
                                 <option value="1" <?= $image['is_active'] ; ?>><?= __('Enable') ;?></option>
                             </select>
                         <td>
                         <td class="value">
-                            <input name="customer_image[<?= $image['id'] ;?>][delete]" type="checkbox" value="1"/>
+                            <input name="customer_image[<?= $image->getId() ;?>][delete]" type="checkbox" value="1"/>
                         </td>
                     </tr>
                     <?php endforeach ; ?>

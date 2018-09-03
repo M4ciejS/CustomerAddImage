@@ -13,9 +13,8 @@ class Nemo_AddImage_Model_Observer
     /**
      * Save customer added image tab data on product save
      *
-     * @param Varien_Event_Observer $observer
      */
-    public function saveProductTabData(Varien_Event_Observer $observer)
+    public function saveProductTabData()
     {
 
         if (!self::$_singletonFlag) {
@@ -27,7 +26,7 @@ class Nemo_AddImage_Model_Observer
             try
             {
                 foreach ($customerImageCollection as $image) {
-                    $index = (int)$image->getId();
+                    $index = (int) $image->getId();
                     if ($imageOptions[$index]['delete'] == 1) {
                         $image->delete();
                         continue;
@@ -52,6 +51,7 @@ class Nemo_AddImage_Model_Observer
      */
     public function getProduct()
     {
+
         return Mage::registry('product');
     }
 
@@ -63,8 +63,5 @@ class Nemo_AddImage_Model_Observer
     {
         return Mage::app()->getRequest();
     }
-    
-    protected function modifyCustomerImagesData($args) {
-        
-    }
+
 }

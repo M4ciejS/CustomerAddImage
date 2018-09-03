@@ -9,6 +9,7 @@
  */
 class Nemo_AddImage_IndexController extends Mage_Core_Controller_Front_Action
 {
+
     /**
      *
      * @var type Nemo_AddImage_Helper_Data
@@ -35,22 +36,23 @@ class Nemo_AddImage_IndexController extends Mage_Core_Controller_Front_Action
      */
     public function saveUploadFileAction()
     {
-        //$this->_helper->saveImage('filename', $this->getRequest()->getParam('product_id'));
         $productId = $this->getRequest()->getParam('product_id');
-        try {
-            if((int) $productId === 0) {
+        try
+        {
+            if ((int) $productId === 0) {
                 throw new Exception(__('Wrong product id'));
             }
             $customerImage = Mage::getModel('nemo_addimage/customerImage');
-            $customerImage->setData('product_id',$productId);
-            $customerImage->setData('filename','filename');
-            $customerImage->setData('created_at',time());//@todo change to Mage created time
+            $customerImage->setData('product_id', $productId);
+            $customerImage->setData('created_at', time()); //@todo change to Mage created time
             $customerImage->save('filename');
             Mage::getSingleton('core/session')->addSuccess(__('Image added, thank you. Your image is awaiting moderation.'));
-        } catch (Exception $e) {
-            Mage::log($e->getMessage(), null, "shorty_port");;
+        } catch (Exception $e)
+        {
+            Mage::log($e->getMessage(), null, $this->_helper->getLogFile());
             Mage::getSingleton('core/session')->addError(__('Error adding image:') . $e->getMessage());
         }
         $this->_redirectReferer();
     }
+
 }
